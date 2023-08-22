@@ -18,13 +18,8 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         
-    - name: Install Nginx
+    - name: Install and Start Nginx
       run: |
         # Install Nginx using your package manager
-        sudo apt-get update
-        sudo apt-get install -y nginx
+        ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-108-60-112.ap-south-1.compute.amazonaws.com "sudo apt update && sudo apt install nginx -y && sudo systemctl start nginx"
         
-    - name: Start Nginx
-      run: |
-        # Start Nginx service
-        sudo systemctl start nginx
